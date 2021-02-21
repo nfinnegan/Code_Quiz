@@ -1,0 +1,18 @@
+header, .strt-quiz {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#strtbtn {
+    background-color: navy;
+    color:oldlace;
+    font-size: 16pt;
+    border-radius: 8px;
+}
+
+#top-row {
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
