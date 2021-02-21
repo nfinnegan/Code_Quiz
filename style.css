@@ -3,11 +3,20 @@ header, .strt-quiz {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#strtbtn {
+#strtbtn, .quest-btn {
     background-color: navy;
     color:oldlace;
     font-size: 16pt;
     border-radius: 8px;
+}
+
+#strtbtn:hover, .quest-btn:hover {
+    background-color: black;
+    cursor: pointer;
+}
+
+.strt-quiz{
+    display: block;
 }
 
 #top-row {
@@ -16,3 +25,12 @@ header, .strt-quiz {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.container {
+    text-align: center;
+    list-style: inside;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#question01 {
+    display: none;
+}

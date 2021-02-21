@@ -21,12 +21,25 @@
             Coding Quiz Challenge
           </h1>
         </header>  
-       <section class="strt-quiz">
+       <section class="strt-quiz" id="hide-section" data-state="visible">
           <p>Try and answer the following code-related question within the time limit
           <br>Keep in mind that incorrect answers will penalize your score time by 10 seconds!
           </p>
          <button id="strtbtn">Start Quiz!</button>
         </section>
+        <div class="container">
+          <div id="question01">
+            <p>Which HTML element do we use to reference our JavaScript file?</p>
+            <ol>
+             <li class="wrong"><button class="quest-btn">&lt javascript &gt</button></li>
+             <li class="right"><button class="quest-btn">&lt script &gt</button></li>
+             <li class="wrong"><button class="quest-btn">&lt style &gt</button></li>
+             <li class="wrong"><button class="quest-btn">&lt js &gt</button></li>   
+            </ol>
+            <p class="addText"></p>
+          </div>  
+          
+        </div>
         
         <script src="../Code_Quiz/script.js"> </script>
     </body>
