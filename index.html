@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
@@ -21,25 +17,32 @@
             Coding Quiz Challenge
           </h1>
         </header>  
-       <section class="strt-quiz" id="hide-section" data-state="visible">
+       <section class="strt-quiz" id="hide-section">
           <p>Try and answer the following code-related question within the time limit
           <br>Keep in mind that incorrect answers will penalize your score time by 10 seconds!
           </p>
          <button id="strtbtn">Start Quiz!</button>
         </section>
         <div class="container">
-          <div id="question01">
-            <p>Which HTML element do we use to reference our JavaScript file?</p>
-            <ol>
-             <li class="wrong"><button class="quest-btn">&lt javascript &gt</button></li>
-             <li class="right"><button class="quest-btn">&lt script &gt</button></li>
-             <li class="wrong"><button class="quest-btn">&lt style &gt</button></li>
-             <li class="wrong"><button class="quest-btn">&lt js &gt</button></li>   
-            </ol>
-            <p class="addText"></p>
-          </div>  
+          <p id="questions"></p>
+          <div id="buttons"> </div>
+            <!-- <li><button class="buttons"></button></li>
+            <li><button class="buttons"></button></li>
+            <li><button class="buttons"></button></li>
+            <li><button class="buttons"></button></li> -->
+          <!-- </ol> -->
+          <div id="user-alert"></div>
+          <div id="answers"></div> 
+        </div>  
+        <!-- <section id="finished">
+          <h1>All Done!</h1>
+          <form>
+            <label for="initials">Enter initials:</label>
+            <input type="text" id="initials" name="initials">
+          </form>
+        </section> -->
           
-        </div>
+      
         
         <script src="../Code_Quiz/script.js"> </script>
     </body>
