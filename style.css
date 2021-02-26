@@ -31,6 +31,10 @@ header, .strt-quiz {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#finished{
+    display: none;
+}
+
 /* #questions {
     display: none;
 } */

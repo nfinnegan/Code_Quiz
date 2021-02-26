@@ -5,7 +5,7 @@ var currentQuestionIndex = 0
 var questionsLoop = document.getElementById("questions");
 var btnsDiv = document.getElementById("buttons")
 var seconds = 75;
-var liItems = document.getElementsByTagName("li");
+var container = $(".container");
 
 //start button event listener to get the timer & questions kicked off
 startQuiz.addEventListener("click",countDown)
@@ -20,8 +20,6 @@ if (seconds <= 0){
 },1000)
 var element = document.getElementById("hide-section");
 element.style.display = "none";
-// questionsLoop.style.display = "block";
-// btnsDiv.style.display = "block";
 quizQuestions();
 
 };
@@ -67,6 +65,7 @@ var questionsOpts =
     for (i= 0; i < questionsOpts[currentQuestionIndex].choices.length; i++) {
         var button = document.createElement("button");
         button.innerText = questionsOpts[currentQuestionIndex].choices[i];
+        console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
         btnsDiv.appendChild(button);
         buttonArray.push(button);
         // console.log(button);
@@ -99,15 +98,13 @@ function nextQuestion(){
     console.log(questionsOpts[currentQuestionIndex]);
     let buttonArray = [];
 
-    for (i= 0; i < questionsOpts[currentQuestionIndex].choices.length; i++) {
-         var button = document.getElementsByClassName(".allButtons");
-         button.innerText = questionsOpts[currentQuestionIndex].choices[i];
-    //     btnsDiv.appendChild(button);
-    //     buttonArray.push(button)
-    
+    var updateButtons = questionsOpts[currentQuestionIndex].choices;
+        for (i= 0; i < updateButtons.length; i++) {
+        $(".allButtons").text(updateButtons[i]) 
     }
+    
+    
     buttonArray.forEach(function(btn){
-        // console.log(btn);
          btn.addEventListener("click", function(event){
              console.log(event.target);
             if (event.target.innerText === questionsOpts[currentQuestionIndex].answer) {
@@ -121,8 +118,17 @@ function nextQuestion(){
      })
 }
 
+//end game
+function endGame(){
+    if (currentQuestionIndex == 0) {
+    container.style.display = "none";
 
-     
+}     
+
+//display form
+
+
+//store high scores
 
 // function setHighScores () {
 //     // store form input for user highscore 
