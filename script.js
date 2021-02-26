@@ -20,8 +20,9 @@ if (seconds <= 0){
 },1000)
 var element = document.getElementById("hide-section");
 element.style.display = "none";
-questionsLoop.style.display = "block";
-btnsDiv.style.display = "block";
+// questionsLoop.style.display = "block";
+// btnsDiv.style.display = "block";
+quizQuestions();
 
 };
 
@@ -73,19 +74,24 @@ var questionsOpts =
 
      buttonArray.forEach(function(btn){
         // console.log(btn);
-         btn.addEventListener("click", function(){
+        $("button").addClass("allButtons");
+         btn.addEventListener("click", function(event){
              console.log(event.target);
-        //     if (button.innerText === questionsOpts[currentQuestionIndex].answer) {
-        //         userNotify.innerText = "Correct!";
-        //  }
-        //     else {
-        //         userNotify.innerText = "Wrong!";
-        //  }
-        // });
+            if (event.target.innerText === questionsOpts[currentQuestionIndex].answer) {
+                userNotify.innerText = "Correct!";
+                nextQuestion();
+         }
+            else {
+                userNotify.innerText = "Wrong!";
+                seconds= seconds-10;
+                nextQuestion();
+         }
+        });
      })
 
  }
-
+ 
+ 
 
 function nextQuestion(){
     currentQuestionIndex++;
@@ -94,13 +100,25 @@ function nextQuestion(){
     let buttonArray = [];
 
     for (i= 0; i < questionsOpts[currentQuestionIndex].choices.length; i++) {
-        var button = document.createElement("button");
-        button.innerText = questionsOpts[currentQuestionIndex].choices[i];
-        btnsDiv.appendChild(button);
-        buttonArray.push(button)
+         var button = document.getElementsByClassName(".allButtons");
+         button.innerText = questionsOpts[currentQuestionIndex].choices[i];
+    //     btnsDiv.appendChild(button);
+    //     buttonArray.push(button)
     
     }
-    
+    buttonArray.forEach(function(btn){
+        // console.log(btn);
+         btn.addEventListener("click", function(event){
+             console.log(event.target);
+            if (event.target.innerText === questionsOpts[currentQuestionIndex].answer) {
+                userNotify.innerText = "Correct!";
+         }
+            else {
+                userNotify.innerText = "Wrong!";
+                seconds= seconds-10;
+         }
+        });
+     })
 }
 
 
