@@ -120,7 +120,6 @@ function nextQuestion(){
 
 //end game
 function endGame(){
-    if (currentQuestionIndex == 0) {
     container.style.display = "none";
 
 }     
