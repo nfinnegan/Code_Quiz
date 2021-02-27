@@ -2,10 +2,15 @@ var timer = document.getElementById("timer");
 var startQuiz = document.getElementById("strtbtn");
 var userNotify = document.getElementById("user-alert");
 var currentQuestionIndex = 0
+var submitBtn = document.getElementById("submit");
 var questionsLoop = document.getElementById("questions");
 var btnsDiv = document.getElementById("buttons")
+var userScore = document.getElementById("finalScore");
 var seconds = 75;
-var container = $(".container");
+var userInitials = document.getElementById("initials");
+var form = document.getElementById("finished");
+//var user = document.getElementById("initials").value;
+
 
 //start button event listener to get the timer & questions kicked off
 startQuiz.addEventListener("click",countDown)
@@ -60,7 +65,7 @@ var questionsOpts =
 //diplaying first question
  function quizQuestions () {
     questionsLoop.innerText = questionsOpts[currentQuestionIndex].question;
-    console.log(questionsOpts[currentQuestionIndex]);
+    //console.log(questionsOpts[currentQuestionIndex]);
     let buttonArray = [];
     for (i= 0; i < questionsOpts[currentQuestionIndex].choices.length; i++) {
         var button = document.createElement("button");
@@ -68,12 +73,12 @@ var questionsOpts =
         console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
         btnsDiv.appendChild(button);
         buttonArray.push(button);
-        // console.log(button);
+        $("button").addClass("controlBtns");
+        console.log(button);
     };
 
      buttonArray.forEach(function(btn){
         // console.log(btn);
-        $("button").addClass("allButtons");
          btn.addEventListener("click", function(event){
              console.log(event.target);
             if (event.target.innerText === questionsOpts[currentQuestionIndex].answer) {
@@ -91,49 +96,78 @@ var questionsOpts =
  }
  
  
-
+//disply & iterate through questions 2-4
 function nextQuestion(){
     currentQuestionIndex++;
     questionsLoop.innerText = questionsOpts[currentQuestionIndex].question;
     console.log(questionsOpts[currentQuestionIndex]);
+   $("#buttons").empty();
     let buttonArray = [];
-
-    var updateButtons = questionsOpts[currentQuestionIndex].choices;
-        for (i= 0; i < updateButtons.length; i++) {
-        $(".allButtons").text(updateButtons[i]) 
-    }
+   
+    for (i= 0; i < questionsOpts[currentQuestionIndex].choices.length; i++) {
+        var button = document.createElement("button");
+        button.innerText = questionsOpts[currentQuestionIndex].choices[i];
+        console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
+        btnsDiv.appendChild(button);
+        buttonArray.push(button);
+        // console.log(button);
+        
+    };
     
-    
-    buttonArray.forEach(function(btn){
+        buttonArray.forEach(function(btn){
          btn.addEventListener("click", function(event){
              console.log(event.target);
             if (event.target.innerText === questionsOpts[currentQuestionIndex].answer) {
                 userNotify.innerText = "Correct!";
-         }
+                nextQuestion();
+            }
             else {
                 userNotify.innerText = "Wrong!";
                 seconds= seconds-10;
-         }
+                nextQuestion();
+            } 
         });
      })
 }
 
 //end game
 function endGame(){
-    container.style.display = "none";
+   $(".container").hide();
+   form.style.display = "block";
+   userScore.innerText = "Your final score is " + seconds;
+   $("#timer").hide();
+    
+}   
 
-}     
+
 
 //display form
 
 
 //store high scores
 
-// function setHighScores () {
-//     // store form input for user highscore 
-//     //localStorage.setItem("highScores", user highscore)
+// function setHighScores(event) {
+//     console.log(event);
+
 // }
 
+submitBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    var user = document.getElementById("initials").value;
+    var secondsLeft = seconds;//not pausing time pauses at submit
+    localStorage.setItem("userName",user);
+    localStorage.setItem("score", secondsLeft);
+    $("#finished").hide();
+    $("#highScores").show();
+    setHighScores();
+})
+
+function setHighScores() {
+    var element = $("<li>");
+    element.text(function(){
+        user + "- " + seconds;
+    })
+}
 
 // function getHighScores () {
     
