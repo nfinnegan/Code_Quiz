@@ -1,5 +1,6 @@
 var timer = document.getElementById("timer");
 var startQuiz = document.getElementById("strtbtn");
+var goBack = document.getElementById("go_backBtn");
 var userNotify = document.getElementById("user-alert");
 var currentQuestionIndex = 0
 var submitBtn = document.getElementById("submit");
@@ -9,6 +10,7 @@ var userScore = document.getElementById("finalScore");
 var seconds = 75;
 var userInitials = document.getElementById("initials");
 var form = document.getElementById("finished");
+var time = '';
 //var user = document.getElementById("initials").value;
 
 
@@ -25,7 +27,11 @@ if (seconds <= 0){
 },1000)
 var element = document.getElementById("hide-section");
 element.style.display = "none";
+if ($(".container").hide()){
+    $(".container").show();
+}
 quizQuestions();
+
 
 };
 
@@ -59,6 +65,16 @@ var questionsOpts =
 
  ]
  
+ //Go Back Btn 
+goBack.addEventListener("click",function(){
+var element = document.getElementById("hide-section");
+element.style.display = "block";
+$("#highScores").hide();
+$("#timer").text("Time: 0")
+seconds =75; 
+currentQuestionIndex = 0;
+$("#buttons").empty();
+});
  
 
 
@@ -99,12 +115,7 @@ var questionsOpts =
 //disply & iterate through questions 2-4
 function nextQuestion(){
     currentQuestionIndex++;
-    if (currentQuestionIndex > questionsOpts.length){
-        endGame();
-    }
-    else {
-        nextQuestion();
-    }
+    if (currentQuestionIndex >= questionsOpts.length) endGame();
     questionsLoop.innerText = questionsOpts[currentQuestionIndex].question;
     //console.log(questionsOpts[currentQuestionIndex]);
    $("#buttons").empty();
@@ -138,33 +149,16 @@ function nextQuestion(){
 
 }
 
-//if(currentQuestionIndex >= questionsOpts.length){
-   // endGame();
-//}
-
-// if (currentQuestionIndex > questionsOpts.length){
-//     setTimeout(endGame(),1000)
-// }
-// else {
-//     return;
-// }
 
 //end game
 function endGame(){
    $(".container").hide();
    form.style.display = "block";
    userScore.innerText = "Your final score is " + seconds;
-   $("#timer").hide();
-
-    
+   //$("#timer").hide();
+   clearInterval(time);   
 }   
 
-
-
-//display form
-
-
-//store high scores
 
 // function setHighScores(event) {
 //     console.log(event);
@@ -179,19 +173,18 @@ submitBtn.addEventListener("click", function(event){
     localStorage.setItem("score", secondsLeft);
     $("#finished").hide();
     $("#highScores").show();
-    setHighScores();
+    //setHighScores();
 })
 
-function setHighScores() {
-    var element = $("<li>");
-    element.text(function(){
-        user + "- " + seconds;
-    })
-}
+// function setHighScores() {
+//     var element = $("<li>");
+//     element.text(function(){
+//         user + "- " + seconds;
+//     })
+// }
 
 // function getHighScores () {
     
 //     var storedHighScores = localStorage.getItem("highScores")
 // }
 
-  //getQuestions()
