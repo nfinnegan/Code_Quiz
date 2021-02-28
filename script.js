@@ -99,24 +99,31 @@ var questionsOpts =
 //disply & iterate through questions 2-4
 function nextQuestion(){
     currentQuestionIndex++;
+    if (currentQuestionIndex > questionsOpts.length){
+        endGame();
+    }
+    else {
+        nextQuestion();
+    }
     questionsLoop.innerText = questionsOpts[currentQuestionIndex].question;
-    console.log(questionsOpts[currentQuestionIndex]);
+    //console.log(questionsOpts[currentQuestionIndex]);
    $("#buttons").empty();
     let buttonArray = [];
-   
+    console.log(currentQuestionIndex);
     for (i= 0; i < questionsOpts[currentQuestionIndex].choices.length; i++) {
         var button = document.createElement("button");
         button.innerText = questionsOpts[currentQuestionIndex].choices[i];
-        console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
+       // console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
         btnsDiv.appendChild(button);
-        buttonArray.push(button);
-        // console.log(button);
-        
+        buttonArray.push(button);  
+              
     };
     
+
         buttonArray.forEach(function(btn){
          btn.addEventListener("click", function(event){
              console.log(event.target);
+             
             if (event.target.innerText === questionsOpts[currentQuestionIndex].answer) {
                 userNotify.innerText = "Correct!";
                 nextQuestion();
@@ -128,7 +135,19 @@ function nextQuestion(){
             } 
         });
      })
+
 }
+
+//if(currentQuestionIndex >= questionsOpts.length){
+   // endGame();
+//}
+
+// if (currentQuestionIndex > questionsOpts.length){
+//     setTimeout(endGame(),1000)
+// }
+// else {
+//     return;
+// }
 
 //end game
 function endGame(){
@@ -136,6 +155,7 @@ function endGame(){
    form.style.display = "block";
    userScore.innerText = "Your final score is " + seconds;
    $("#timer").hide();
+
     
 }   
 
