@@ -8,10 +8,12 @@
         <link rel="stylesheet" href="../Code_Quiz/style.css">
     </head>
     <body>
+      <!-- Timer & View HighScores link -->
        <div id="top-row">
-        <a id="high-score" href="#highScores">View Highscores</a>
+        <a id="high-score">View Highscores</a>
         <span id="timer">Time:<span>0</span></span> 
        </div> 
+       <!-- Landing page of the game to kick the quiz off -->
       <header>
           <h1>
             Coding Quiz Challenge
@@ -23,6 +25,7 @@
           </p>
          <button id="strtbtn">Start Quiz!</button>
         </section>
+        <!-- Container for questions/choices to show up dynamically through JS -->
         <div class="container">
           <p id="questions"></p>
           <div id="buttons"> </div>
@@ -30,6 +33,7 @@
           <div id="user-alert"></div>
           <div id="answers"></div> 
         </div>  
+        <!-- Section for user to enter in their initials for highscore once complete -->
         <section id="finished">
           <h1>All Done!</h1>
           <div id="finalScore"></div>
@@ -40,6 +44,7 @@
             <input type="submit" id="submit" name="Submit"></input>
           </form>
         </section>
+        <!-- HighScore list users sees after entering their info, option to go back or clear scores -->
           <section id="highScores">
             <h3>High Scores:</h3>
             <ul class="hsList"></ul>

@@ -18,6 +18,7 @@ var time = '';
 //start button event listener to get the timer & questions kicked off
 startQuiz.addEventListener("click",countDown)
 
+//start timer & displaying first question to user
 function countDown() {
 time = setInterval(function(){
  seconds--;
@@ -37,7 +38,7 @@ quizQuestions();
 };
 
 
-
+//questions, options & answers for quiz
 var questionsOpts = 
 [
     {
@@ -96,6 +97,7 @@ clearScores.addEventListener("click",function(){
         //console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
         btnsDiv.appendChild(button);
         buttonArray.push(button);
+        $("button").addClass("allButtons");
        // console.log(button);
     };
 
@@ -121,7 +123,7 @@ clearScores.addEventListener("click",function(){
 //disply & iterate through questions 2-4
 function nextQuestion(){
     currentQuestionIndex++;
-    if (currentQuestionIndex >= questionsOpts.length) endGame();
+        if (currentQuestionIndex >= questionsOpts.length) endGame();
     questionsLoop.innerText = questionsOpts[currentQuestionIndex].question;
     //console.log(questionsOpts[currentQuestionIndex]);
    $("#buttons").empty();
@@ -132,11 +134,11 @@ function nextQuestion(){
         button.innerText = questionsOpts[currentQuestionIndex].choices[i];
        // console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
         btnsDiv.appendChild(button);
-        buttonArray.push(button);  
+        buttonArray.push(button);
+        $("button").addClass("allButtons");
+  
               
     };
-    
-
         buttonArray.forEach(function(btn){
          btn.addEventListener("click", function(event){
              console.log(event.target);
@@ -162,39 +164,54 @@ function endGame(){
    form.style.display = "block";
    userScore.innerText = "Your final score is " + seconds;
    $("#timer").hide();
-   clearInterval(time);   
+   clearInterval(time);
+   userNotify.innerText = "";   
 }   
 
 
-// function setHighScores(event) {
-//     console.log(event);
 
-// }
-
+//store Highscores locally
 submitBtn.addEventListener("click", function(event){
     event.preventDefault();
-    var user = document.getElementById("initials").value;
-    var secondsLeft = seconds;
-    localStorage.setItem("userName",user);
-    localStorage.setItem("score", secondsLeft);
+    var scoreCombo = {
+        initials: userInitials.value,
+        secondsLeft: seconds,
+    }
+    localStorage.setItem("scoresList", JSON.stringify(scoreCombo));
+   // var user = document.getElementById("initials").value;
+    //var secondsLeft = seconds;
+    //localStorage.setItem("userName",user);
+    //localStorage.setItem("score", secondsLeft);
     $("#finished").hide();
     $("#highScores").show();
     setHighScores();
 })
 
+
+//set Highscores on page 
 function setHighScores() {
     $(".hsList").append("<li>")
     var user = document.getElementById("initials").value;
     $("li").addClass("hsList");
     $("li").text(user + "-" + seconds);
-       
-
 }
 
-function getHighScores () {
-    localStorage.getItem("userName");
-    localStorage.getItem("score");
-    
-//     var storedHighScores = localStorage.getItem("highScores")
-// }
 
+
+
+ //view highscores on page
+$("a").click(function(){
+   var getScores = JSON.parse(localStorage.getItem("scoreCombo"));
+    // var getUser  = localStorage.getItem("userName");
+   // var getScore = localStorage.getItem("score");
+    $("#highScores").show();
+    //$("li").text(getScores.initials + "-" + getScores.secondsLeft);
+        if ($(".strt-quiz").show()) {
+            $(".strt-quiz").hide();
+    };
+        if ($(".container").show()) {
+            $(".container").hide();
+    };
+    $("li").text(getScores.initials + "-" + getScores.secondsLeft);
+
+})  

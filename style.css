@@ -3,7 +3,7 @@ header, .strt-quiz {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#strtbtn {
+#strtbtn, #submit, #go_backBtn, #clearScores, .allButtons {
     background-color: navy;
     color:oldlace;
     font-size: 16pt;
