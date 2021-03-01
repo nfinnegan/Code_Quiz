@@ -43,3 +43,7 @@ header, .strt-quiz {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
+
+.hsList {
+    list-style-type: none;
+}

@@ -1,6 +1,7 @@
 var timer = document.getElementById("timer");
 var startQuiz = document.getElementById("strtbtn");
 var goBack = document.getElementById("go_backBtn");
+var clearScores = document.getElementById("clearScores");
 var userNotify = document.getElementById("user-alert");
 var currentQuestionIndex = 0
 var submitBtn = document.getElementById("submit");
@@ -74,8 +75,14 @@ $("#timer").text("Time: 0")
 seconds =75; 
 currentQuestionIndex = 0;
 $("#buttons").empty();
+$("#timer").show();
 });
  
+//clear scores Btn
+clearScores.addEventListener("click",function(){
+    $(".hsList").empty();
+})
+
 
 
 //diplaying first question
@@ -86,11 +93,10 @@ $("#buttons").empty();
     for (i= 0; i < questionsOpts[currentQuestionIndex].choices.length; i++) {
         var button = document.createElement("button");
         button.innerText = questionsOpts[currentQuestionIndex].choices[i];
-        console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
+        //console.log("answer key on buttons " + questionsOpts[currentQuestionIndex].choices[i])
         btnsDiv.appendChild(button);
         buttonArray.push(button);
-        $("button").addClass("controlBtns");
-        console.log(button);
+       // console.log(button);
     };
 
      buttonArray.forEach(function(btn){
@@ -155,7 +161,7 @@ function endGame(){
    $(".container").hide();
    form.style.display = "block";
    userScore.innerText = "Your final score is " + seconds;
-   //$("#timer").hide();
+   $("#timer").hide();
    clearInterval(time);   
 }   
 
@@ -168,22 +174,26 @@ function endGame(){
 submitBtn.addEventListener("click", function(event){
     event.preventDefault();
     var user = document.getElementById("initials").value;
-    var secondsLeft = seconds;//not pausing time pauses at submit
+    var secondsLeft = seconds;
     localStorage.setItem("userName",user);
     localStorage.setItem("score", secondsLeft);
     $("#finished").hide();
     $("#highScores").show();
-    //setHighScores();
+    setHighScores();
 })
 
-// function setHighScores() {
-//     var element = $("<li>");
-//     element.text(function(){
-//         user + "- " + seconds;
-//     })
-// }
+function setHighScores() {
+    $(".hsList").append("<li>")
+    var user = document.getElementById("initials").value;
+    $("li").addClass("hsList");
+    $("li").text(user + "-" + seconds);
+       
 
-// function getHighScores () {
+}
+
+function getHighScores () {
+    localStorage.getItem("userName");
+    localStorage.getItem("score");
     
 //     var storedHighScores = localStorage.getItem("highScores")
 // }
