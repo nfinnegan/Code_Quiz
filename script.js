@@ -83,7 +83,7 @@ $("#timer").show();
  
 //clear scores Btn
 clearScores.addEventListener("click",function(){
-    $("li").empty();
+    window.localStorage.setItem("scoreCombo",JSON.stringify([]));
 })
 
 
@@ -180,14 +180,10 @@ submitBtn.addEventListener("click", function(event){
         secondsLeft: seconds,
     }
 
-    userInfo.push(scoreCombo);
-    console.log(userInfo, "scores" + getScores);
-    getScores.push(userInfo[0])
-    localStorage.setItem("scoreCombo", JSON.stringify(getScores));
-   // var user = document.getElementById("initials").value;
-    //var secondsLeft = seconds;
-    //localStorage.setItem("userName",user);
-    //localStorage.setItem("score", secondsLeft);
+    let oldScores = JSON.parse(window.localStorage.getItem("scoreCombo")) || [];
+    oldScores.push(scoreCombo);
+    window.localStorage.setItem("scoreCombo", JSON.stringify(oldScores));
+    console.log(oldScores);
     $("#finished").hide();
     $("#highScores").show();
     setHighScores();
@@ -196,38 +192,28 @@ submitBtn.addEventListener("click", function(event){
 
 //set Highscores on page 
 function setHighScores() {
-   // console.log(getScores);
-    for (let score of getScores){
-        console.log(score.initials, score.secondsLeft);
-        $(".hsList").append("<li>")
-        $("li").addClass("hsList");
-        $("li").text(score.initials + "_" + score.secondsLeft);
+   let scores = JSON.parse(window.localStorage.getItem("scoreCombo")) || [];
 
+    for (let s of scores){
+        console.log(scores.initials, scores.secondsLeft);
+        $(".hsList").empty();
+        $(".hsList").append(`<p>${s.initials} ${s.secondsLeft}</p>`)
     }
-   // var user = document.getElementById("initials").value;
-    //i=0;
-    //i++;
-    //$("li").text(user + "-" + seconds);
+   
 }
-
-
-
 
  //view highscores on page
 $("a").click(function(){
-  //var getScores = JSON.parse(localStorage.getItem("scoreCombo"));
   console.log(getScores);
-    // var getUser  = localStorage.getItem("userName");
-   // var getScore = localStorage.getItem("score");
     $("#highScores").show();
-    setHighScores();
-    //$("li").text(getScores.initials + "-" + getScores.secondsLeft);
         if ($(".strt-quiz").show()) {
             $(".strt-quiz").hide();
     };
         if ($(".container").show()) {
             $(".container").hide();
     };
-    //$("li").text(getScores);
-
+        if ($(".finished").show()) {
+            $(".finished").hide();
+};
+    setHighScores();
 })  
