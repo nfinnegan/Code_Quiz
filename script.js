@@ -83,6 +83,7 @@ $("#timer").show();
  
 //clear scores Btn
 clearScores.addEventListener("click",function(){
+    $(".hsList").empty();
     window.localStorage.setItem("scoreCombo",JSON.stringify([]));
 })
 
