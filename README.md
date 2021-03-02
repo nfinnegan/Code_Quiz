@@ -29,5 +29,8 @@ THEN I can save my initials and my score
 ```
 
 ## Deployed Application
+Link to deployed application: https://nfinnegan.github.io/Code_Quiz/
 
 ## Preview
+
+![Code_Quiz_Preview](Code_Quiz.gif);

@@ -12,6 +12,8 @@ var seconds = 75;
 var userInitials = document.getElementById("initials");
 var form = document.getElementById("finished");
 var time = '';
+var getScores = JSON.parse(localStorage.getItem("scoreCombo"))== null ?[]:JSON.parse(localStorage.getItem("scoreCombo"));
+var userInfo = [];
 //var user = document.getElementById("initials").value;
 
 
@@ -81,7 +83,7 @@ $("#timer").show();
  
 //clear scores Btn
 clearScores.addEventListener("click",function(){
-    $(".hsList").empty();
+    $("li").empty();
 })
 
 
@@ -177,7 +179,11 @@ submitBtn.addEventListener("click", function(event){
         initials: userInitials.value,
         secondsLeft: seconds,
     }
-    localStorage.setItem("scoresList", JSON.stringify(scoreCombo));
+
+    userInfo.push(scoreCombo);
+    console.log(userInfo, "scores" + getScores);
+    getScores.push(userInfo[0])
+    localStorage.setItem("scoreCombo", JSON.stringify(getScores));
    // var user = document.getElementById("initials").value;
     //var secondsLeft = seconds;
     //localStorage.setItem("userName",user);
@@ -190,10 +196,18 @@ submitBtn.addEventListener("click", function(event){
 
 //set Highscores on page 
 function setHighScores() {
-    $(".hsList").append("<li>")
-    var user = document.getElementById("initials").value;
-    $("li").addClass("hsList");
-    $("li").text(user + "-" + seconds);
+   // console.log(getScores);
+    for (let score of getScores){
+        console.log(score.initials, score.secondsLeft);
+        $(".hsList").append("<li>")
+        $("li").addClass("hsList");
+        $("li").text(score.initials + "_" + score.secondsLeft);
+
+    }
+   // var user = document.getElementById("initials").value;
+    //i=0;
+    //i++;
+    //$("li").text(user + "-" + seconds);
 }
 
 
@@ -201,10 +215,12 @@ function setHighScores() {
 
  //view highscores on page
 $("a").click(function(){
-   var getScores = JSON.parse(localStorage.getItem("scoreCombo"));
+  //var getScores = JSON.parse(localStorage.getItem("scoreCombo"));
+  console.log(getScores);
     // var getUser  = localStorage.getItem("userName");
    // var getScore = localStorage.getItem("score");
     $("#highScores").show();
+    setHighScores();
     //$("li").text(getScores.initials + "-" + getScores.secondsLeft);
         if ($(".strt-quiz").show()) {
             $(".strt-quiz").hide();
@@ -212,6 +228,6 @@ $("a").click(function(){
         if ($(".container").show()) {
             $(".container").hide();
     };
-    $("li").text(getScores.initials + "-" + getScores.secondsLeft);
+    //$("li").text(getScores);
 
 })  
